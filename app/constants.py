@@ -18,10 +18,9 @@ FEATURE_COLUMNS_PATH = os.path.join(MODELS_DIR, "feature_columns.joblib")
 
 
 # Model download URLs (Google Drive links)
-DOM_MODEL_URL = "https://drive.google.com/file/d/1l70G_Rirzs88fXxTtsFQ4rpj-p-MTGlT/view?usp=drive_link"
-PRICE_MODEL_URL = "https://drive.google.com/file/d/1qc_zboKF0qNEjuLEQk2IJtIWIM23XgZe/view?usp=sharing"
-FEATURE_COLUMNS_URL = "https://drive.google.com/file/d/14RyQ-tbjrd8cDVy4YNPFxs5lkqDan2-C/view?usp=sharing"
-
+DOM_MODEL_URL = "https://drive.google.com/uc?id=1l70G_Rirzs88fXxTtsFQ4rpj-p-MTGlT"
+PRICE_MODEL_URL = "https://drive.google.com/uc?id=1qc_zboKF0qNEjuLEQk2IJtIWIM23XgZe"
+FEATURE_COLUMNS_URL = "https://drive.google.com/uc?id=14RyQ-tbjrd8cDVy4YNPFxs5lkqDan2-C"
 
 # Column name constants
 LISTING_ID_COL = "listing_id"
