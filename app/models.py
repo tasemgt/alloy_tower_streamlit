@@ -36,26 +36,28 @@ def download_if_missing(path: str, url: str, label: str):
 
 
 @st.cache_resource
-def load_models():
-    paths = {
-        "DOM_MODEL_PATH": DOM_MODEL_PATH,
-        "PRICE_MODEL_PATH": PRICE_MODEL_PATH,
-        "FEATURE_COLUMNS_PATH": FEATURE_COLUMNS_PATH,
-    }
+def load_models() -> Tuple[Any, Any, List[str]]:
+    os.makedirs("models", exist_ok=True)
 
-    # Print debug info
-    st.write("📁 Root files:", os.listdir("."))
-    st.write("📁 Models folder exists:", os.path.exists("models"))
+    dom_path = "models/dom_model.joblib"
+    price_path = "models/price_model.joblib"
+    feature_path = "models/feature_columns.joblib"
 
-    for name, path in paths.items():
-        st.write(f"🔍 Checking {name}: {path}")
+    def download_if_missing(url, path):
         if not os.path.exists(path):
-            st.error(f"❌ Missing file: {path}")
-            raise FileNotFoundError(f"{name} not found: {path}")
+            st.info(f"📥 Downloading {path}...")
+            gdown.download(url, path, quiet=False)
 
-    dom_model = joblib.load(DOM_MODEL_PATH)
-    price_model = joblib.load(PRICE_MODEL_PATH)
-    feature_cols = joblib.load(FEATURE_COLUMNS_PATH)
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Download failed: {path}")
+
+    download_if_missing(DOM_MODEL_URL, dom_path)
+    download_if_missing(PRICE_MODEL_URL, price_path)
+    download_if_missing(FEATURE_COLUMNS_URL, feature_path)
+
+    dom_model = joblib.load(dom_path)
+    price_model = joblib.load(price_path)
+    feature_cols = joblib.load(feature_path)
 
     st.success("✅ Models loaded successfully")
 
