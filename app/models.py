@@ -37,26 +37,28 @@ def download_if_missing(path: str, url: str, label: str):
 
 @st.cache_resource
 def load_models() -> Tuple[Any, Any, List[str]]:
-    """
-    Load trained models and feature columns (cached).
-    Downloads models once if missing.
-    """
-    try:
-        # Download if missing (only runs once)
-        download_if_missing(DOM_MODEL_PATH, DOM_MODEL_URL, "DOM")
-        download_if_missing(PRICE_MODEL_PATH, PRICE_MODEL_URL, "Price")
-        download_if_missing(FEATURE_COLUMNS_PATH, FEATURE_COLUMNS_URL, "Feature Columns")
+    os.makedirs("models", exist_ok=True)
 
-        # Load models
-        dom_model = joblib.load(DOM_MODEL_PATH)
-        price_model = joblib.load(PRICE_MODEL_PATH)
-        feature_cols = joblib.load(FEATURE_COLUMNS_PATH)
+    dom_path = "models/dom_model.joblib"
+    price_path = "models/price_model.joblib"
+    feature_path = "models/feature_columns.joblib"
 
-        return dom_model, price_model, feature_cols
+    def download_if_missing(url, path):
+        if not os.path.exists(path):
+            st.info(f"Downloading model: {path}")
+            gdown.download(url, path, quiet=False)
 
-    except Exception as e:
-        st.error(f"Error loading models: {str(e)}")
-        raise
+    # Download models if needed
+    download_if_missing(DOM_MODEL_URL, dom_path)
+    download_if_missing(PRICE_MODEL_URL, price_path)
+    download_if_missing(FEATURE_COLUMNS_URL, feature_path)
+
+    # Load models
+    dom_model = joblib.load(dom_path)
+    price_model = joblib.load(price_path)
+    feature_cols = joblib.load(feature_path)
+
+    return dom_model, price_model, feature_cols
 
 
 def predict_dom(model: Any, X) -> float:
