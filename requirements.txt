@@ -8,5 +8,4 @@ snowflake-sqlalchemy
 streamlit
 joblib
 gdown
-imghdr
 altair<5
