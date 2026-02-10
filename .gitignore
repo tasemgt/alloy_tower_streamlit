@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data (ignore by default)
+*.csv
+*.xlsx
+*.xls
+
+
+!ml/data/*.csv
+
+
+!requirements.txt
+
+
+# Models (large files)
+models/
+*.pkl
+
+# Reports (ignore by default)
+reports/*.csv
+reports/*.html
+
+# Allow the key report output used by the app
+!reports/dom_risk_scoring_output.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Snowflake credentials
+*credentials*.json
+*config*.json
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Test files
+test_*.py
