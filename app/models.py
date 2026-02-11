@@ -45,7 +45,7 @@ def load_models() -> Tuple[Any, Any, List[str]]:
 
     def download_if_missing(url, path):
         if not os.path.exists(path):
-            st.info(f"📥 Downloading {path}...")
+            # st.info(f"📥 Downloading {path}...")
             gdown.download(url, path, quiet=False)
 
         if not os.path.exists(path):
