@@ -30,7 +30,7 @@ from app.constants import (
 def download_if_missing(path: str, url: str, label: str):
     """Download model only if not present."""
     if not os.path.exists(path):
-        st.warning(f"Downloading {label} model (first run only)...")
+        # st.warning(f"Downloading {label} model (first run only)...")
         os.makedirs(os.path.dirname(path), exist_ok=True)
         gdown.download(url, path, quiet=False)
 
